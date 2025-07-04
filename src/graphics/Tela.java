@@ -32,6 +32,8 @@ public class Tela extends JPanel implements KeyListener, Runnable {
     @Override
     protected void paintComponent(Graphics p) {
         super.paintComponent(p);
+        ImageIcon background = new ImageIcon("src/images/background.jpg", "background image");
+        p.drawImage( background.getImage() , 0, 0, 800, 600, null);
 
         p.setFont(new Font("TimesRoman", Font.ITALIC, 24));
         p.setColor(Color.WHITE);
@@ -62,7 +64,7 @@ public class Tela extends JPanel implements KeyListener, Runnable {
                     null);
         }
 
-        ImageIcon asteroidimage = new ImageIcon("src/images/asteroids.png", "asteroid");
+        ImageIcon asteroidimage = new ImageIcon("src/images/asteroid.png", "asteroid");
         for (Asteroid asteroid : asteroids) {
             p.drawImage(asteroidimage.getImage(), asteroid.getPosX(), asteroid.getPosY(), asteroid.getSide(),
                     asteroid.getSide(), null);
@@ -122,7 +124,6 @@ public class Tela extends JPanel implements KeyListener, Runnable {
                         && (enemy.getPosY() > player.getCurrentPosY()
                                 && enemy.getPosY() < (player.getCurrentPosY() + player.getSide()))) {
                     gameOver = true;
-                    System.out.println("GameOver");
                     break;
                 }
                 enemy.setDirection((int) Math.floor((Math.random() * 900)));
@@ -134,7 +135,6 @@ public class Tela extends JPanel implements KeyListener, Runnable {
                         && (elite.getPosY() > player.getCurrentPosY()
                                 && elite.getPosY() < (player.getCurrentPosY() + player.getSide()))) {
                     gameOver = true;
-                    System.out.println("GameOver");
                     break;
                 }
                 elite.move(player.getCurrentPosX(), player.getCurrentPosY());
@@ -145,7 +145,6 @@ public class Tela extends JPanel implements KeyListener, Runnable {
                         && (asteroid.getPosY() > player.getCurrentPosY()
                                 && asteroid.getPosY() < (player.getCurrentPosY() + player.getSide()))) {
                     gameOver = true;
-                    System.out.println("GameOver");
                     break;
                 }
                 asteroid.move();
@@ -158,13 +157,16 @@ public class Tela extends JPanel implements KeyListener, Runnable {
                 player.setCurrentPosX(player.getStartPosX());
                 player.setCurrentPosY(player.getStartPosY());
                 goal.reposition();
+                for (Enemy enemy : enemies) {
+                    enemy.reposition();
+                }
                 score++;
-                if (score > 15) {
+                if (score > 12) {
                     for (Asteroid asteroid : asteroids) {
                         asteroid.setSpeed(asteroid.getSpeed() + 1);
                     }
                 } else if (score > 10) {
-                    asteroids.add(new Asteroid((int) (Math.random() * 100) + 300));
+                    asteroids.add(new Asteroid((int) (Math.random() * 100) + 150));
                 } else if (score > 7) {
                     for (Elite elite : elites) {
                         elite.setSpeed(elite.getSpeed() + 1);

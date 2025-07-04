@@ -5,7 +5,7 @@ public class Asteroid extends Movable {
     public int posY;
 
     public Asteroid(int posX){
-        this.setPosY(0);
+        this.setPosY(1);
         this.setPosX(posX);
     }
 

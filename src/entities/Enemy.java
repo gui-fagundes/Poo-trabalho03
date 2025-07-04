@@ -11,7 +11,6 @@ public class Enemy extends Movable {
         this.setSpeed(1);
     }
 
-
     public int getPosX() {
         return posX;
     }
@@ -86,15 +85,18 @@ public class Enemy extends Movable {
                 this.setPosX(this.getPosX() - this.getSpeed());
             }
         } else if (this.getDirection() < 800) {
-            if (this.posY <= 0 || this.posX >= 750){
+            if (this.posY <= 0 || this.posX >= 750) {
                 this.setPosY(this.getPosY() + this.getSpeed());
                 this.setPosX(this.getPosX() - this.getSpeed());
-            }
-            else{
+            } else {
                 this.setPosY(this.getPosY() - this.getSpeed());
                 this.setPosX(this.getPosX() + this.getSpeed());
             }
         }
     }
 
+    public void reposition() {
+        this.setPosX((int) (Math.random() * 550 + 200));
+        this.setPosY((int) (Math.random() * 400 + 150));
+    }
 }
