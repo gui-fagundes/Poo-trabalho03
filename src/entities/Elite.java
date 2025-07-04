@@ -38,4 +38,9 @@ public class Elite extends Movable {
             this.setPosY(this.getPosY() + this.getSpeed());
         }
     }
+
+    public void reposition(){
+        this.setPosX((int)(Math.random()*200) + 500);
+        this.setPosY((int)(Math.random()*300)+ 200);
+    }
 }

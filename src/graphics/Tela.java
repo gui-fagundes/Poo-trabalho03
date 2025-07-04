@@ -15,7 +15,8 @@ import src.entities.Goal;
 import src.entities.Player;
 
 public class Tela extends JPanel implements KeyListener, Runnable {
-    int score = 1;
+    String goalsrc = "src/images/moon.png";
+    int score = 0;
     boolean gameOver = false;
     boolean up, down, left, right = false;
     Player player = new Player();
@@ -45,7 +46,7 @@ public class Tela extends JPanel implements KeyListener, Runnable {
             p.drawString("GAMEOVER", 280, 250);
         }
 
-        ImageIcon goalimage = new ImageIcon("src/images/moon.png", "goal");
+        ImageIcon goalimage = new ImageIcon(goalsrc, "goal");
         p.drawImage(goalimage.getImage(), goal.getPosX(), goal.getPosY(), goal.getSize(), goal.getSize(), null);
 
         ImageIcon playerimage = new ImageIcon("src/images/player.png", "player");
@@ -160,18 +161,23 @@ public class Tela extends JPanel implements KeyListener, Runnable {
                 for (Enemy enemy : enemies) {
                     enemy.reposition();
                 }
+                for (Elite elite : elites) {
+                    elite.reposition();
+                }
                 score++;
-                if (score > 12) {
+                if (score > 14) {
                     for (Asteroid asteroid : asteroids) {
                         asteroid.setSpeed(asteroid.getSpeed() + 1);
                     }
                 } else if (score > 10) {
-                    asteroids.add(new Asteroid((int) (Math.random() * 100) + 150));
-                } else if (score > 7) {
+                    goalsrc = "src/images/saturn.png";
+                    asteroids.add(new Asteroid((int) (Math.random() * 500) + 150));
+                } else if (score > 8) {
                     for (Elite elite : elites) {
                         elite.setSpeed(elite.getSpeed() + 1);
                     }
                 } else if (score > 5) {
+                    goalsrc = "src/images/mars.png";
                     elites.add(new Elite((int) (Math.random() * 100 + 600), (int) (Math.random() * 100 + 450)));
                 } else {
                     player.setSpeed(player.getSpeed() + 1);

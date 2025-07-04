@@ -27,14 +27,14 @@ public class Asteroid extends Movable {
 
     public void move(){
         if(this.posY > 600){
-            this.posY = 0;
+            this.setPosY(0);
         }else{
-            this.posY++;
+            this.setPosY(this.getPosY() + 1);
         }
         if(this.posX < 0){
-            this.posX = 800;
+            this.setPosX(800);
         }else{
-            this.posX--;
+            this.setPosX(this.getPosX() - 1);
         }
     }
 
