@@ -1,7 +1,5 @@
 package src.entities;
 
-import java.awt.Color;
-
 public class Player extends Movable {
     private int startPosX = 50;
     private int startPosY = 50;

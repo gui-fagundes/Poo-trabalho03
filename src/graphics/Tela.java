@@ -34,7 +34,7 @@ public class Tela extends JPanel implements KeyListener, Runnable {
     protected void paintComponent(Graphics p) {
         super.paintComponent(p);
         ImageIcon background = new ImageIcon("src/images/background.jpg", "background image");
-        p.drawImage( background.getImage() , 0, 0, 800, 600, null);
+        p.drawImage(background.getImage(), 0, 0, 800, 600, null);
 
         p.setFont(new Font("TimesRoman", Font.ITALIC, 24));
         p.setColor(Color.WHITE);
@@ -120,10 +120,11 @@ public class Tela extends JPanel implements KeyListener, Runnable {
             player.move(up, down, left, right);
 
             for (Enemy enemy : enemies) {
-                if ((enemy.getPosX() > player.getCurrentPosX()
-                        && enemy.getPosX() < (player.getCurrentPosX() + player.getSide()))
-                        && (enemy.getPosY() > player.getCurrentPosY()
-                                && enemy.getPosY() < (player.getCurrentPosY() + player.getSide()))) {
+                boolean colidiu = player.getCurrentPosX() < enemy.getPosX() + enemy.getSide() &&
+                        player.getCurrentPosX() + player.getSide() > enemy.getPosX() &&
+                        player.getCurrentPosY() < enemy.getPosY() + enemy.getSide() &&
+                        player.getCurrentPosY() + player.getSide() > enemy.getPosY();
+                if (colidiu) {
                     gameOver = true;
                     break;
                 }
@@ -131,20 +132,22 @@ public class Tela extends JPanel implements KeyListener, Runnable {
                 enemy.move();
             }
             for (Elite elite : elites) {
-                if ((elite.getPosX() > player.getCurrentPosX()
-                        && elite.getPosX() < (player.getCurrentPosX() + player.getSide()))
-                        && (elite.getPosY() > player.getCurrentPosY()
-                                && elite.getPosY() < (player.getCurrentPosY() + player.getSide()))) {
+                boolean colidiu = player.getCurrentPosX() < elite.getPosX() + elite.getSide() &&
+                        player.getCurrentPosX() + player.getSide() > elite.getPosX() &&
+                        player.getCurrentPosY() < elite.getPosY() + elite.getSide() &&
+                        player.getCurrentPosY() + player.getSide() > elite.getPosY();
+                if (colidiu) {
                     gameOver = true;
                     break;
                 }
                 elite.move(player.getCurrentPosX(), player.getCurrentPosY());
             }
             for (Asteroid asteroid : asteroids) {
-                if ((asteroid.getPosX() > player.getCurrentPosX()
-                        && asteroid.getPosX() < (player.getCurrentPosX() + player.getSide()))
-                        && (asteroid.getPosY() > player.getCurrentPosY()
-                                && asteroid.getPosY() < (player.getCurrentPosY() + player.getSide()))) {
+                boolean colidiu = player.getCurrentPosX() < asteroid.getPosX() + asteroid.getSide() &&
+                        player.getCurrentPosX() + player.getSide() > asteroid.getPosX() &&
+                        player.getCurrentPosY() < asteroid.getPosY() + asteroid.getSide() &&
+                        player.getCurrentPosY() + player.getSide() > asteroid.getPosY();
+                if (colidiu) {
                     gameOver = true;
                     break;
                 }
